@@ -5,8 +5,8 @@ var router = express.Router()
 var board = require('./board')
 const ejs = require('ejs');
 const app=express()
-var server = app.listen(8080, () => {
-    console.log('Running on http://localhost:8080');
+var server = app.listen(80, () => {
+    console.log('Running on http://localhost:80');
   });
 var socketIO = socket(server)
 
@@ -32,9 +32,7 @@ function start() {
         boards.push(board.generateBoard(num))
     }
     app.get('/',function(request,response){
-        var state1=false
-        var state2=false
-        response.render('canvas')
+        response.render('room',{joinList:joinList})
     });
 
     app.get('/room',function(request,response){
