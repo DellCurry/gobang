@@ -82,6 +82,7 @@ function start() {
             socket.on('disconnect',function(){
                 socket.leave(roomID)
                 socketIO.emit('sys',roomID,side,'leave');
+                joinList[roomIndex][sideIndex]=0
                 boards[roomIndex] = board.clearBoard(boards[roomIndex],num)
                 socket.broadcast.to(roomID).emit('roomplayer','leave')
                 socket.disconnect(0)
