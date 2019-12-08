@@ -82,8 +82,6 @@ function start() {
             socket.on('disconnect',function(){
                 socket.leave(roomID)
                 socketIO.emit('sys',roomID,side,'leave');
-                //delete from joinlist
-                joinList[roomIndex][sideIndex]=0
                 boards[roomIndex] = board.clearBoard(boards[roomIndex],num)
                 socket.broadcast.to(roomID).emit('roomplayer','leave')
                 socket.disconnect(0)
@@ -91,8 +89,10 @@ function start() {
             socket.on('move',function(X,Y){
                 boards[roomIndex][X][Y] = (side == 'black')? 1:-1
                 socket.broadcast.to(roomID).emit("oppomove",side,X,Y)
-                if (board.judge(boards[roomIndex],X,Y,num))
+                if (board.judge(boards[roomIndex],X,Y,num)){
                     socketIO.to(roomID).emit("gameover",side)
+                    boards[roomIndex] = board.clearBoard(boards[roomIndex],num)
+                }
             })
         }
     })
