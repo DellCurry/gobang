@@ -1,3 +1,4 @@
+const toWin = 5
 function judge(board,X,Y,num){
     var side = board[X][Y];
     var win = 1
@@ -15,7 +16,7 @@ function judge(board,X,Y,num){
         else
             break;
     }
-    if (win>=5)
+    if (win>=toWin)
         return true;
     else
         win = 1
@@ -33,7 +34,7 @@ function judge(board,X,Y,num){
         else
             break;
     }
-    if (win>=5)
+    if (win>=toWin)
         return true;
     else
         win = 1
@@ -51,7 +52,7 @@ function judge(board,X,Y,num){
         else
             break;
     }
-    if (win>=5)
+    if (win>=toWin)
         return true;
     else
         win = 1
@@ -69,7 +70,7 @@ function judge(board,X,Y,num){
         else
             break;
     }
-    if (win>=5)
+    if (win>=toWin)
         return true;
     else
         return false;

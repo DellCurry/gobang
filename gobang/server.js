@@ -76,12 +76,17 @@ function start() {
                 console.log(joinList)
                 socket.broadcast.to(roomID).emit('roomplayer','join')
             })
+            socket.on('leave',function(){
+                joinList[roomIndex][sideIndex]=0
+            })
             socket.on('disconnect',function(){
                 socket.leave(roomID)
                 socketIO.emit('sys',roomID,side,'leave');
                 //delete from joinlist
                 joinList[roomIndex][sideIndex]=0
+                boards[roomIndex] = board.clearBoard(boards[roomIndex],num)
                 socket.broadcast.to(roomID).emit('roomplayer','leave')
+                socket.disconnect(0)
             })
             socket.on('move',function(X,Y){
                 boards[roomIndex][X][Y] = (side == 'black')? 1:-1
