@@ -65,6 +65,7 @@ window.onload=function(){
 			if (window.confirm("You win! Another game?")==true){
 				initState()
 				load()
+				showTurn(onMove)
 			}
 			else{
 				socket.emit('leave')
@@ -76,6 +77,7 @@ window.onload=function(){
 			if (window.confirm("You lose! Another game?")==true){
 				initState()
 				load()
+				showTurn(onMove)
 			}
 			else{
 				socket.emit('leave')
